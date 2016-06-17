@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="memory">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="app/angular.min.js"></script>
+    <script type="text/javascript" src="app/app.js"></script>
+    <title>Title{{2 + 1}}</title>
+</head>
+<body ng-controller="GameController" ng-init="changeSize()">
+    <div id="logo"></div>
+    <div id="menu">
+        <div id="control">
+            <form id="form">
+                <div ng-show="!gameStarted">
+                    <input class="button" type="button" name="start" value="Start" ng-click="startGame()" ><br>
+                    <label for="size" class="belwe">Gameboard size<br></label>
+                    <select class="select"
+                            id="size"
+                            ng-model="selectedSize"
+                            ng-options="size.name for size in size"
+                            ng-change="changeSize()">
+                    </select>
+                    <label for="imgSet" class="belwe">Select image set<br></label>
+                    <select class="select"
+                            id="imgSet"
+                            ng-model="selectedImgSet"
+                            ng-options="imgSet.name for imgSet in imgSet"
+                            ng-change="changeSet()">
+                    </select>
+                    <label for="cardBack" class="belwe">Select image set<br></label>
+                    <select class="select"
+                            id="cardBack"
+                            ng-model="currentCardBack"
+                            ng-options="cardBack.name for cardBack in cardBack"
+                            ng-change="changeBack()">
+                    </select>
+                </div>
+                <div ng-show="gameStarted">
+                    <input class="button" type="button" name="reset" value="Reset" ng-click="resetGame()" ><br>
+                </div>
+            </form>
+            <table class="result" width="90%" ng-show="gameStarted">
+                <tr>
+                    <td colspan="2">Round: {{rounds}}</td>
+                </tr>
+                <tr>
+                    <td width="50%">Match</td><td width="50%">Miss</td>
+                </tr>
+                <tr>
+                    <td>{{match}}</td><td>{{miss}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Score: {{score}}</td>
+                </tr>
+            </table>
+            <p class="timer" ng-show="counter > 0">Show-off in {{counter}} sec.</p>
+        </div>
+    </div>
+    <div id="game" class="board">
+        <div ng-repeat="card in cards">
+            <img class="tile" src="resources/back/{{currentCardBack.filePNG}}.png" ng-click="flipCard(card)" />
+        </div>
+    </div>
+</body>
+</html>
