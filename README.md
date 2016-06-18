@@ -1,4 +1,5 @@
 # hearthstone-memory
 Memory game
 
-http://aizen.ru/hs-memory/
+
+http://hs-memory.aizen.ru
