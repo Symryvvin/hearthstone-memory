@@ -46,6 +46,7 @@ body{
     width: 140px;
     height: 200px;
     margin: 10px;
+    border-radius: 5px;
 }
 .tile:hover{
     width: 150px;
