@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script type="text/javascript" src="app/angular.min.js"></script>
     <script type="text/javascript" src="app/app.js"></script>
-    <title>Title{{2 + 1}}</title>
+    <title>Hearthstone Memory v 1.0</title>
 </head>
 <body ng-controller="GameController" ng-init="changeSize()">
     <div id="logo"></div>
@@ -13,8 +13,8 @@
         <div id="control">
             <form id="form">
                 <div ng-show="!gameStarted">
-                    <input class="button" type="button" name="start" value="Start" ng-click="startGame()" ><br>
-                    <label for="size" class="belwe">Gameboard size<br></label>
+                    <input class="button" type="button" name="start" value="Start" data-ng-click="startGame()" ><br>
+                    <label for="size" class="belwe">Game board size<br></label>
                     <select class="select"
                             id="size"
                             ng-model="selectedSize"
@@ -37,10 +37,10 @@
                     </select>
                 </div>
                 <div ng-show="gameStarted">
-                    <input class="button" type="button" name="reset" value="Reset" ng-click="resetGame()" ><br>
+                    <input class="button" type="button" name="reset" value="Reset" data-ng-click="resetGame()" ><br>
                 </div>
             </form>
-            <table class="result" width="90%" ng-show="gameStarted">
+            <table class="result" width="90%" ng-show="gameStarted && !gameEnd">
                 <tr>
                     <td colspan="2">Round: {{rounds}}</td>
                 </tr>
@@ -54,12 +54,13 @@
                     <td colspan="2">Score: {{score}}</td>
                 </tr>
             </table>
+            <p class="timer" ng-show="gameEnd">You WIN with {{miss}} miss<br>and score {{score}} points.<br>Please click <i>reset</i> to start new game</p>
             <p class="timer" ng-show="counter > 0">Show-off in {{counter}} sec.</p>
         </div>
     </div>
     <div id="game" class="board">
         <div ng-repeat="card in cards">
-            <img class="tile" src="resources/back/{{currentCardBack.filePNG}}.png" ng-click="flipCard(card)" />
+            <img class="tile" ng-model="currentCardBack" src="resources/back/{{currentCardBack.filePNG}}.png" data-ng-click="flipCard(card)" />
         </div>
     </div>
 </body>
